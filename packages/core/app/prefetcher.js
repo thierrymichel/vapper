@@ -64,7 +64,7 @@ const clientPlugin = function (Vue) {
       // so the component's own `created` hook function is the penultimate.
       // https://github.com/nuxt/vue-meta/blob/master/src/shared/mixin.js#L75-L89
       if (typeof this.$options.head === 'function') {
-        selfCreatedHook = this.$options.created.splice(this.$options.created.length - 2, 1)
+        selfCreatedHook = this.$options.created.splice(this.$options.created.length - 2, 1)[0]
         this.$options.created[this.$options.created.length] = selfCreatedHook
       }
 
