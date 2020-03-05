@@ -16,7 +16,7 @@ export default {
   },
   needSerialize: true,
   async created () {
-    console.log(this.$browser)
+    console.log(this.$browser.isChrome())
     const res1 = await fetch()
     const res2 = await fetch()
 

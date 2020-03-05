@@ -1,7 +1,7 @@
 const path = require('path')
 const p = path.resolve(__dirname, './platform.ejs')
 
-module.exports = (api, options = { browsers: [] }) => {
+module.exports = (api, options = { browsers: [], checkers: {} }) => {
   api.addEnhanceFile({
     needCompile: true,
     client: p,

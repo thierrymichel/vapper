@@ -19,13 +19,15 @@ export default function (ctx) {
 
   const parser = new _Parser(UA)
 
-  const _browser = parser
-  _browser.name = parser.getBrowser().name
-  _browser.version = parser.getBrowser().version
+  const browser = parser
+  browser.name = parser.getBrowser().name
+  browser.version = parser.getBrowser().version
+
+  Object.assign(browser, <%= serialize(options.checkers) %>)
 
   // Enhance ctx
-  ctx.$browser = _browser
-  ctx.rootOptions.$browser = _browser
+  ctx.$browser = browser
+  ctx.rootOptions.$browser = browser
 }
 
 export const PlatformParser = _Parser

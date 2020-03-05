@@ -674,6 +674,6 @@ const browsersList = [
 
 export default browsersList
 
-export function appendBrowsers (list) {
+export function appendBrowsers (list = []) {
   browsersList.unshift(...list)
 }

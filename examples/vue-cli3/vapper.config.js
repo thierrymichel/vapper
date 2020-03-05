@@ -10,7 +10,13 @@ module.exports = {
       }
     ],
     '@vapper/plugin-cookie',
-    platform
+    [platform, {
+      checkers: {
+        isChrome () {
+          return browser.name === 'Chrome'
+        }
+      }
+    }]
   ],
   htmlMinifier: true
 }
