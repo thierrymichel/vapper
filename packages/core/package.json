@@ -1,6 +1,6 @@
 {
   "name": "@vapper/core",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "bin": {
     "vapper": "bin/cli.js"
   },
