@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/vapperjs/vapper/compare/@vapper/core@1.6.0...@vapper/core@1.7.0) (2020-03-07)
+
+
+### Features
+
+* **core:** optimize the hydration process ([#84](https://github.com/vapperjs/vapper/issues/84)) ([0ef352d](https://github.com/vapperjs/vapper/commit/0ef352d))
+
+
+
+
+
 # [1.6.0](https://github.com/vapperjs/vapper/compare/@vapper/core@1.5.0...@vapper/core@1.6.0) (2020-03-05)
 
 
