@@ -56,11 +56,12 @@ const clientPlugin = function (Vue) {
 
   Vue.mixin({
     beforeCreate: function () {
+      const key = getKey(keyMap, this)
+
       if (!this.$options.needSerialize && !this.$options.needPrefetch) return
 
       // Rewrite the `data` option
       const $$selfStore = this.$root.$$selfStore
-      const key = getKey(keyMap, this)
 
       if (!clientPlugin.$$resolved && $$selfStore && $$selfStore[key]) {
         const initData = this.$options.data
