@@ -58,6 +58,21 @@ const clientPlugin = function (Vue) {
     beforeCreate: function () {
       if (!this.$options.needSerialize && !this.$options.needPrefetch) return
 
+      // Rewrite the `data` option
+      const $$selfStore = this.$root.$$selfStore
+      const key = getKey(keyMap, this)
+
+      if (!clientPlugin.$$resolved && $$selfStore && $$selfStore[key]) {
+        const initData = this.$options.data
+        this.$options.data = function () {
+          const data = this._data = typeof initData === 'function'
+            ? initData.call(this, this)
+            : initData || {}
+
+          return Object.assign(data, $$selfStore[key] || {})
+        }
+      }
+
       // The component's own `created` hook
       let selfCreatedHook = this.$options.created[this.$options.created.length - 1]
       // vue-meta will push a new `created` hook function in the `beforeCreate` hook,
@@ -78,16 +93,6 @@ const clientPlugin = function (Vue) {
         }
         return selfCreatedHook.apply(this, args)
       }
-    },
-    created: function () {
-      const $$selfStore = this.$root.$$selfStore
-      if (clientPlugin.$$resolved || !$$selfStore) { return }
-
-      const key = getKey(keyMap, this)
-
-      try {
-        Object.assign(this, $$selfStore[key] || {})
-      } catch (err) {}
     },
     errorCaptured: function (err) {
       if (err.isVapperSsrPrefetcher) { return false }
