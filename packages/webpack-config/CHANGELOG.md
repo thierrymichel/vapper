@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/vapperjs/vapper/compare/@vapper/webpack-config@1.1.1...@vapper/webpack-config@1.2.0) (2020-03-14)
+
+
+### Features
+
+* **core:** respect the publicPath set by the user ([4260e7f](https://github.com/vapperjs/vapper/commit/4260e7f)), closes [#74](https://github.com/vapperjs/vapper/issues/74)
+
+
+
+
+
 ## [1.1.1](https://github.com/vapperjs/vapper/compare/@vapper/webpack-config@1.1.0...@vapper/webpack-config@1.1.1) (2020-02-03)
 
 **Note:** Version bump only for package @vapper/webpack-config

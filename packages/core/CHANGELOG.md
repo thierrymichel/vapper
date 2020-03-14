@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/vapperjs/vapper/compare/@vapper/core@1.7.4...@vapper/core@1.8.0) (2020-03-14)
+
+
+### Features
+
+* **core:** respect the publicPath set by the user ([4260e7f](https://github.com/vapperjs/vapper/commit/4260e7f)), closes [#74](https://github.com/vapperjs/vapper/issues/74)
+
+
+
+
+
 ## [1.7.4](https://github.com/vapperjs/vapper/compare/@vapper/core@1.7.3...@vapper/core@1.7.4) (2020-03-07)
 
 **Note:** Version bump only for package @vapper/core

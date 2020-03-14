@@ -1,13 +1,13 @@
 {
   "name": "@vapper/configer-poi",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "lib/index.js",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@vapper/webpack-config": "^1.1.1",
+    "@vapper/webpack-config": "^1.2.0",
     "poi": "^12.7.1"
   },
   "gitHead": "e76b3b567661b9845b18799689479754adb24d6a"

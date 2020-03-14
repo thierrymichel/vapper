@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/vapperjs/vapper/compare/@vapper/configer-vue-cli@1.1.0...@vapper/configer-vue-cli@1.1.1) (2020-03-14)
+
+**Note:** Version bump only for package @vapper/configer-vue-cli
+
+
+
+
+
 # [1.1.0](https://github.com/vapperjs/vapper/compare/@vapper/configer-vue-cli@1.0.2...@vapper/configer-vue-cli@1.1.0) (2020-02-12)
 
 
