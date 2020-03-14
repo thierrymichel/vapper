@@ -18,10 +18,7 @@ module.exports = (api, config) => {
           : api.resolveCWD('node_modules/vue/dist/vue.runtime.esm.js')
     )
 
-  let publicPath = config.output.get('publicPath')
-  publicPath = api.isProd
-    ? publicPath || '/_vapper_/'
-    : publicPath && publicPath !== '/' ? publicPath : '/_vapper_/'
+  const publicPath = config.output.get('publicPath')
   // Set `api.publicPath` for use in plugins, E.g: plugins/fallbackSpa.js / plugins/serveStatic.js
   api.publicPath = stripSlash(publicPath)
 

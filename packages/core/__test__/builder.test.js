@@ -100,7 +100,8 @@ describe('Dev mode: ', () => {
     expect(webpackDevMiddleware).toHaveBeenCalledWith(compiler, {
       publicPath: 'publicPath',
       logLevel: 'silent',
-      noInfo: true
+      noInfo: true,
+      index: false
     })
     expect(webpackHotMiddleware).toHaveBeenCalledWith(compiler, { log: false })
     expect(mockTap).toHaveBeenNthCalledWith(2, '@vapper', expect.any(Function))

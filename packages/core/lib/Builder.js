@@ -75,7 +75,8 @@ class Builder extends EventEmitter {
       this.devMiddleware = require('webpack-dev-middleware')(this.clientCompiler, {
         publicPath: this.clientWebpackConfig.output.publicPath,
         logLevel: 'silent',
-        noInfo: true
+        noInfo: true,
+        index: false
       })
       this.hotMiddleware = require('webpack-hot-middleware')(this.clientCompiler, {
         log: false
