@@ -26,7 +26,15 @@ module.exports = (api) => {
 
   const afterHandler = (err, req, res, next) => {
     if (api.options.fallBackSpa && err && err.isVapper) {
-      api.logger.debug(`Server rendering encountered an error:`, err)
+      delete err.isVapper
+
+      api.logger.error(`Server rendering encountered an error:`)
+      api.logger.error(`
+      \u001b[31m=============== Error Start ===============\u001b[39m
+      `,
+      err,
+      `
+      \u001b[31m=============== Error End =================\u001b[39m`)
       api.logger.debug(`Will fall back SPA mode, url is: ${req.url}`)
       fallBack(req, res)
       return
