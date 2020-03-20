@@ -36,6 +36,10 @@ module.exports = (api) => {
       `
       \u001b[31m=============== Error End =================\u001b[39m`)
       api.logger.debug(`Will fall back SPA mode, url is: ${req.url}`)
+      api.notify({
+        title: 'Server rendering error',
+        message: err.message
+      })
       fallBack(req, res)
       return
     }

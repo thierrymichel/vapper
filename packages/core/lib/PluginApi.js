@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const EventEmitter = require('events')
 const dotenv = require('dotenv')
+const notifier = require('node-notifier')
 
 class PluginApi extends EventEmitter {
   constructor () {
@@ -160,6 +161,19 @@ class PluginApi extends EventEmitter {
     for (const h of hooks) {
       h(...args)
     }
+  }
+
+  notify (options = {}, fn = () => {}) {
+    // disable in prod-env
+    if (this.isProd) return
+    const defaults = {
+      sound: true,
+      icon: this.resolveCore('lib/vapper.png')
+    }
+    notifier.notify({
+      ...defaults,
+      ...options
+    }, fn)
   }
 }
 
