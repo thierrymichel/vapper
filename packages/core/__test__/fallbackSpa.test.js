@@ -29,6 +29,7 @@ describe('fallbackSpa: ', () => {
       debug: jest.fn(),
       error: jest.fn()
     },
+    notify: jest.fn(),
     use: jest.fn((typeOrFn, fn) => {
       let name = ''
 
@@ -252,7 +253,7 @@ describe('fallbackSpa: ', () => {
       api.options.fallBackSpa = true
 
       fallbackSpa(api)
-      const err = { isVapper: true }
+      const err = { message: 'fake', isVapper: true }
       orignalAfterHandler(err, req, res, next)
 
       expect(api.logger.error.mock.calls.length).toBe(2)
@@ -267,6 +268,13 @@ describe('fallbackSpa: ', () => {
       expect(api.logger.debug.mock.calls.length).toBe(1)
       expect(api.logger.debug.mock.calls[0][0]).toBe(`Will fall back SPA mode, url is: ${req.url}`)
       expect(api.options.fallbackSpaHandler.mock.calls.length).toBe(1)
+
+      expect(api.notify.mock.calls.length).toBe(1)
+      expect(api.notify).toHaveBeenCalledWith({
+        title: 'Server rendering error',
+        message: err.message
+      })
+
       expect(next.mock.calls.length).toBe(0)
 
       api.options.fallBackSpa = false
