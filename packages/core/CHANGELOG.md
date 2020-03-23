@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/vapperjs/vapper/compare/@vapper/core@1.8.0...@vapper/core@1.9.0) (2020-03-23)
+
+
+### Features
+
+* **core:** notify when an SSR error occurs ([7f9e67b](https://github.com/vapperjs/vapper/commit/7f9e67b))
+* **core:** optimize the display of error messages ([44bf6f1](https://github.com/vapperjs/vapper/commit/44bf6f1))
+
+
+
+
+
 # [1.8.0](https://github.com/vapperjs/vapper/compare/@vapper/core@1.7.4...@vapper/core@1.8.0) (2020-03-14)
 
 
