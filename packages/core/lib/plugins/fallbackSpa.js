@@ -3,8 +3,9 @@ const finalhandler = require('finalhandler')
 
 module.exports = (api) => {
   // Exposing the fallback function gives the user more choices
-  api.fallbackSPA = (req, res) => {
+  api.fallbackSPA = (req, res, reason) => {
     req._forceFallback = true
+    req._reason = reason || 'Force'
     api.handler(req, res)
   }
 
@@ -15,7 +16,10 @@ module.exports = (api) => {
       : (!meta || meta.ssr !== true)
 
     if (needFallback || req._forceFallback) {
-      api.logger.debug(`${req._forceFallback ? 'Force' : ''} Fall back SPA mode, url is: ${req.url}`)
+      if (!req._forceFallback) req._reason = 'SSR is disabled'
+
+      api.logger.debug(`Will fall back to the SPA mode, url is: ${req.url}`)
+      api.logger.debug(`The reason for the fallback is: ${req._reason}`)
       fallBack(req, res)
       return
     }
@@ -35,7 +39,7 @@ module.exports = (api) => {
       err,
       `
       \u001b[31m=============== Error End =================\u001b[39m`)
-      api.logger.debug(`Will fall back SPA mode, url is: ${req.url}`)
+      api.logger.debug(`Will fall back the SPA mode, url is: ${req.url}`)
       api.notify({
         title: 'Server rendering error',
         message: err.message

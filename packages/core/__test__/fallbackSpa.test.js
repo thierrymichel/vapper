@@ -77,6 +77,9 @@ describe('fallbackSpa: ', () => {
     serveStatic.mockClear()
     mockServerStatic.mockClear()
     finalhandler.mockClear()
+
+    req._reason = 'Force'
+    req._forceFallback = false
   })
 
   test('init fallbackSpa should succeed', () => {
@@ -92,7 +95,6 @@ describe('fallbackSpa: ', () => {
     api.fallbackSPA(req, res)
     expect(req._forceFallback).toBe(true)
     expect(api.handler).toHaveBeenCalledWith(req, res)
-    delete req._forceFallback
   })
 
   describe('preHandler: ', () => {
@@ -125,8 +127,9 @@ describe('fallbackSpa: ', () => {
 
       expect(api.getRouteMeta.mock.calls.length).toBe(1)
       expect(api.getRouteMeta.mock.calls[0][0]).toBe(req.url)
-      expect(api.logger.debug.mock.calls.length).toBe(1)
-      expect(api.logger.debug.mock.calls[0][0]).toBe(' Fall back SPA mode, url is: url of req')
+      expect(api.logger.debug.mock.calls.length).toBe(2)
+      expect(api.logger.debug.mock.calls[0][0]).toBe('Will fall back to the SPA mode, url is: url of req')
+      expect(api.logger.debug.mock.calls[1][0]).toBe('The reason for the fallback is: SSR is disabled')
       expect(api.options.fallbackSpaHandler).toHaveBeenCalledWith(req, res, api)
       expect(next.mock.calls.length).toBe(0)
 
@@ -158,17 +161,14 @@ describe('fallbackSpa: ', () => {
       req._forceFallback = true
 
       fallbackSpa(api)
-      req._forceFallback = true
       orignalPreHandler(req, res, next)
-
       expect(api.getRouteMeta.mock.calls.length).toBe(1)
       expect(api.getRouteMeta.mock.calls[0][0]).toBe(req.url)
-      expect(api.logger.debug.mock.calls.length).toBe(1)
-      expect(api.logger.debug.mock.calls[0][0]).toBe('Force Fall back SPA mode, url is: url of req')
+      expect(api.logger.debug.mock.calls.length).toBe(2)
+      expect(api.logger.debug.mock.calls[0][0]).toBe('Will fall back to the SPA mode, url is: url of req')
+      expect(api.logger.debug.mock.calls[1][0]).toBe('The reason for the fallback is: Force')
       expect(api.options.fallbackSpaHandler.mock.calls.length).toBe(1)
       expect(next.mock.calls.length).toBe(0)
-
-      req._forceFallback = false
     })
 
     test('should fallBack with default fallback spa handler(dev):', () => {
@@ -187,8 +187,9 @@ describe('fallbackSpa: ', () => {
 
       expect(api.getRouteMeta.mock.calls.length).toBe(1)
       expect(api.getRouteMeta.mock.calls[0][0]).toBe(orignalReqUrl)
-      expect(api.logger.debug.mock.calls.length).toBe(1)
-      expect(api.logger.debug.mock.calls[0][0]).toBe('Force Fall back SPA mode, url is: url of req')
+      expect(api.logger.debug.mock.calls.length).toBe(2)
+      expect(api.logger.debug.mock.calls[0][0]).toBe('Will fall back to the SPA mode, url is: url of req')
+      expect(api.logger.debug.mock.calls[1][0]).toBe('The reason for the fallback is: Force')
       expect(api.devMiddleware.fileSystem.readFileSync.mock.calls.length).toBe(1)
       expect(api.devMiddleware.fileSystem.readFileSync.mock.calls[0][0]).toBe(filename)
       expect(api.devMiddleware.getFilenameFromUrl.mock.calls.length).toBe(1)
@@ -199,13 +200,13 @@ describe('fallbackSpa: ', () => {
       expect(res.end.mock.calls.length).toBe(1)
       expect(res.end.mock.calls[0][0]).toBe(html)
 
-      req._forceFallback = false
       req.url = orignalReqUrl
       api.options.fallbackSpaHandler = fallbackSpaHandler
     })
 
     test(`should fallBack with default fallback spa handler(prod):`, () => {
       req._forceFallback = true
+      req._reason = 'some reason'
       api.isProd = true
       delete api.options.fallbackSpaHandler
 
@@ -217,8 +218,9 @@ describe('fallbackSpa: ', () => {
 
       expect(api.getRouteMeta.mock.calls.length).toBe(1)
       expect(api.getRouteMeta.mock.calls[0][0]).toBe(orignalReqUrl)
-      expect(api.logger.debug.mock.calls.length).toBe(1)
-      expect(api.logger.debug.mock.calls[0][0]).toBe('Force Fall back SPA mode, url is: url of req')
+      expect(api.logger.debug.mock.calls.length).toBe(2)
+      expect(api.logger.debug.mock.calls[0][0]).toBe('Will fall back to the SPA mode, url is: url of req')
+      expect(api.logger.debug.mock.calls[1][0]).toBe('The reason for the fallback is: some reason')
       expect(serveStatic.mock.calls.length).toBe(1)
       expect(serveStatic.mock.calls[0][0]).toBe('dist')
       expect(serveStatic.mock.calls[0][1]).toBe(expectedReqUrl.substr(1))
@@ -226,7 +228,7 @@ describe('fallbackSpa: ', () => {
       expect(mockServerStatic.mock.calls[0][2]).toBe(expectedFinalHandler)
       expect(next.mock.calls.length).toBe(0)
       expect(req.url).toBe(expectedReqUrl)
-      req._forceFallback = false
+
       api.isProd = false
       req.url = orignalReqUrl
       api.options.fallbackSpaHandler = fallbackSpaHandler
@@ -266,7 +268,7 @@ describe('fallbackSpa: ', () => {
       \u001b[31m=============== Error End =================\u001b[39m`)
 
       expect(api.logger.debug.mock.calls.length).toBe(1)
-      expect(api.logger.debug.mock.calls[0][0]).toBe(`Will fall back SPA mode, url is: ${req.url}`)
+      expect(api.logger.debug.mock.calls[0][0]).toBe(`Will fall back the SPA mode, url is: ${req.url}`)
       expect(api.options.fallbackSpaHandler.mock.calls.length).toBe(1)
 
       expect(api.notify.mock.calls.length).toBe(1)
