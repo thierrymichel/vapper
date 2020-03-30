@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/vapperjs/vapper/compare/@vapper/core@1.9.3...@vapper/core@1.10.0) (2020-03-30)
+
+
+### Features
+
+* **core:** added the $$createdWaiter to wait for async created to complete ([4218a94](https://github.com/vapperjs/vapper/commit/4218a94))
+* **core:** print the reason for the fallback ([444b10e](https://github.com/vapperjs/vapper/commit/444b10e))
+
+
+
+
+
 ## [1.9.3](https://github.com/vapperjs/vapper/compare/@vapper/core@1.9.2...@vapper/core@1.9.3) (2020-03-23)
 
 **Note:** Version bump only for package @vapper/core
