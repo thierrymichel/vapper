@@ -87,12 +87,18 @@ const clientPlugin = function (Vue) {
       // Rewrite created hook
       this.$options.created[this.$options.created.length - 1] = async function (...args) {
         if (!clientPlugin.$$resolved) {
+          this.$$createdWaiter = Promise.resolve()
           // TODO: VapperError
           const err = new Error('vapper-ssr-prefetcher: custom error')
           err.isVapperSsrPrefetcher = true
           throw err
         }
-        return selfCreatedHook.apply(this, args)
+
+        const hookResult = selfCreatedHook.apply(this, args)
+
+        this.$$createdWaiter = Promise.resolve(hookResult)
+
+        return hookResult
       }
     },
     errorCaptured: function (err) {

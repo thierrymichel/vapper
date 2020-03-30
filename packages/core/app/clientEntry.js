@@ -64,7 +64,7 @@ router.onReady(() => {
 
     app.$mount(el)
     // This is very important, it is used to avoid repeated data fetch,
-    // and must be after the `$mount()` function
+    // and must be after the `app.$mount()` function
     clientPlugin.$$resolved = true
   } else {
     // fallback SPA mode
