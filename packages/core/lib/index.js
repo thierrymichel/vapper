@@ -1,3 +1,4 @@
+const https = require('https')
 const fs = require('fs-extra')
 const path = require('path')
 const cac = require('cac')()
@@ -429,13 +430,20 @@ class Vapper extends PluginApi {
     const {
       options: {
         port,
-        host
+        host,
+        https: httpsConfig
       }
     } = this
 
     await this.setup()
 
-    this.listen(port, host)
+    if (httpsConfig.key && httpsConfig.cert) {
+      // Use https
+      const server = https.createServer(httpsConfig, this.app)
+      server.listen(port, host)
+    } else {
+      this.listen(port, host)
+    }
 
     this.printRunningInfo()
   }
@@ -444,10 +452,17 @@ class Vapper extends PluginApi {
     const {
       options: {
         port,
-        host
+        host,
+        https: httpsConfig
       }
     } = this
-    this.logger.info(`Server running at: http://${host}:${port}`)
+    const useHttps = httpsConfig.key && httpsConfig.cert
+    const printHost = useHttps
+      ? host === ('0.0.0.0' || '127.0.0.1')
+        ? 'localhost'
+        : host
+      : host
+    this.logger.info(`Server running at: http${useHttps ? 's' : ''}://${printHost}:${port}`)
   }
 
   resolveOut (...args) {

@@ -12,6 +12,7 @@ exports.options = {
   templatePath: null,
   port: 4000,
   host: '0.0.0.0',
+  https: {},
   logger: undefined,
   logLevel: 5,
   static: {
@@ -75,5 +76,6 @@ exports.optionsSchema = Joi.object({
   needResolveRouteMeta: Joi.boolean(),
   env: Joi.alternatives().try(Joi.string(), ''),
   runtimeCompiler: Joi.boolean(),
-  enhanceFileImportsOption: Joi.object()
+  enhanceFileImportsOption: Joi.object(),
+  https: Joi.object()
 })
