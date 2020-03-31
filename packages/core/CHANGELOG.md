@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/vapperjs/vapper/compare/@vapper/core@1.10.0...@vapper/core@1.11.0) (2020-03-31)
+
+
+### Features
+
+* **core:** support https ([#88](https://github.com/vapperjs/vapper/issues/88)) ([8589225](https://github.com/vapperjs/vapper/commit/8589225)), closes [#86](https://github.com/vapperjs/vapper/issues/86)
+
+
+
+
+
 # [1.10.0](https://github.com/vapperjs/vapper/compare/@vapper/core@1.9.3...@vapper/core@1.10.0) (2020-03-30)
 
 
