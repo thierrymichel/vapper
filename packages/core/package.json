@@ -1,6 +1,6 @@
 {
   "name": "@vapper/core",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "bin": {
     "vapper": "bin/cli.js"
   },
@@ -35,5 +35,5 @@
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-middleware": "^2.25.0"
   },
-  "gitHead": "f984d603839c9c7e7f3df24d82859a7969b7da6b"
+  "gitHead": "4d70e193dbc8387da5d402d7dd6cd8ce8b0ab1de"
 }
