@@ -23,7 +23,13 @@ export default function (ctx) {
   browser.name = parser.getBrowser().name
   browser.version = parser.getBrowser().version
 
-  Object.assign(browser, <%= serialize(options.checkers) %>)
+  const checkers = <%= serialize(options.checkers) %>
+
+  Object.keys(checkers).forEach((checkerName) => {
+    checkers[checkerName] = checkers[checkerName].bind(browser)
+  })
+
+  Object.assign(browser, checkers)
 
   // Enhance ctx
   ctx.$browser = browser

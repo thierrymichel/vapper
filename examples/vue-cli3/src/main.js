@@ -19,4 +19,3 @@ export default function createApp (ctx) {
   // 3. return
   return app
 }
-

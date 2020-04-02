@@ -13,7 +13,7 @@ module.exports = {
     [platform, {
       checkers: {
         isChrome () {
-          return browser.name === 'Chrome'
+          return this.name === 'Chrome'
         }
       }
     }]
