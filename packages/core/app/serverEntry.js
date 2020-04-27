@@ -41,6 +41,7 @@ export default async context => {
   if (context.renderError) {
     if (rootOptions.ErrorComponent) {
       const app = new Vue({
+        head: rootOptions.head || {},
         render (h) {
           return h(rootOptions.ErrorComponent, { props: { error: context.renderError } })
         }
