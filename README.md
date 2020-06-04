@@ -82,7 +82,5 @@ yarn test:stress
 
 ## Core Author
 
-**Vapper** © [HcySunYang](https://github.com/HcySunYang), Released under the [MIT](./LICENSE) License.<br>
+**Vapper** © [水滴FED](https://github.com/shuidi-fed), Released under the [MIT](./LICENSE) License.<br>
 Authored and maintained by [Front-end team of water drop](https://zhuanlan.zhihu.com/shuidi-fed).
-
-> [homepage](http://hcysun.me/homepage/) · GitHub [@HcySunYang](https://github.com/HcySunYang) · Twitter [@HcySunYang](https://twitter.com/HcySunYang)
