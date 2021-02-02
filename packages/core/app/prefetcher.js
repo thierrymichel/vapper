@@ -6,7 +6,9 @@ function serverPlugin (Vue) {
     })
 
     // The component's own `created` hook
-    const selfCreatedHook = this.$options.created[this.$options.created.length - 1]
+    const selfCreatedHook = this.$options.created[
+      this.$options.created.length - 1
+    ]
     if (selfCreatedHook.__async) return
 
     // Rewrite created hook
@@ -66,26 +68,24 @@ const clientPlugin = function (Vue) {
       if (!clientPlugin.$$resolved && $$selfStore && $$selfStore[key]) {
         const initData = this.$options.data
         this.$options.data = function () {
-          const data = this._data = typeof initData === 'function'
-            ? initData.call(this, this)
-            : initData || {}
+          const data = (this._data =
+            typeof initData === 'function'
+              ? initData.call(this, this)
+              : initData || {})
 
           return Object.assign(data, $$selfStore[key] || {})
         }
       }
 
       // The component's own `created` hook
-      let selfCreatedHook = this.$options.created[this.$options.created.length - 1]
-      // vue-meta will push a new `created` hook function in the `beforeCreate` hook,
-      // so the component's own `created` hook function is the penultimate.
-      // https://github.com/nuxt/vue-meta/blob/master/src/shared/mixin.js#L75-L89
-      if (typeof this.$options.head === 'function') {
-        selfCreatedHook = this.$options.created.splice(this.$options.created.length - 2, 1)[0]
-        this.$options.created[this.$options.created.length] = selfCreatedHook
-      }
+      const selfCreatedHook = this.$options.created[
+        this.$options.created.length - 1
+      ]
 
       // Rewrite created hook
-      this.$options.created[this.$options.created.length - 1] = async function (...args) {
+      this.$options.created[this.$options.created.length - 1] = async function (
+        ...args
+      ) {
         if (!clientPlugin.$$resolved) {
           this.$$createdWaiter = Promise.resolve()
           // TODO: VapperError
@@ -102,7 +102,9 @@ const clientPlugin = function (Vue) {
       }
     },
     errorCaptured: function (err) {
-      if (err.isVapperSsrPrefetcher) { return false }
+      if (err.isVapperSsrPrefetcher) {
+        return false
+      }
       return true
     }
   })
